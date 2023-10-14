@@ -1,23 +1,43 @@
 namespace SpriteKind {
     export const NPC1 = SpriteKind.create()
     export const NPC2 = SpriteKind.create()
+    export const NPC3 = SpriteKind.create()
+    export const NPC4 = SpriteKind.create()
+    export const NPC5 = SpriteKind.create()
 }
+sprites.onOverlap(SpriteKind.Player, SpriteKind.NPC5, function (sprite, otherSprite) {
+    music.play(music.createSoundEffect(WaveShape.Sine, 5000, 1, 255, 0, 153, SoundExpressionEffect.None, InterpolationCurve.Curve), music.PlaybackMode.UntilDone)
+    game.splash("The Great Wall of China is one of the most famous ancient city walls in the world")
+    effects.blizzard.endScreenEffect()
+    effects.none.startScreenEffect()
+})
 sprites.onOverlap(SpriteKind.Player, SpriteKind.NPC2, function (sprite, otherSprite) {
     music.play(music.createSoundEffect(WaveShape.Triangle, 4906, 1046, 255, 0, 150, SoundExpressionEffect.None, InterpolationCurve.Linear), music.PlaybackMode.UntilDone)
-    game.splash("")
+    game.splash("Blue and white porcelain is a famous porcelain in China")
     effects.starField.endScreenEffect()
     effects.bubbles.startScreenEffect()
 })
+sprites.onOverlap(SpriteKind.Player, SpriteKind.NPC3, function (sprite, otherSprite) {
+    music.play(music.createSoundEffect(WaveShape.Triangle, 4906, 1046, 255, 0, 150, SoundExpressionEffect.None, InterpolationCurve.Linear), music.PlaybackMode.UntilDone)
+    game.splash("Taoism and Buddhism are the two major religions in China")
+    effects.bubbles.endScreenEffect()
+    effects.clouds.startScreenEffect()
+})
+sprites.onOverlap(SpriteKind.Player, SpriteKind.NPC4, function (sprite, otherSprite) {
+    music.play(music.createSoundEffect(WaveShape.Sine, 5000, 0, 255, 0, 500, SoundExpressionEffect.None, InterpolationCurve.Linear), music.PlaybackMode.UntilDone)
+    game.splash("China has a history of more than five thousand years")
+    effects.clouds.endScreenEffect()
+    effects.blizzard.startScreenEffect()
+})
 sprites.onOverlap(SpriteKind.Player, SpriteKind.NPC1, function (sprite, otherSprite) {
     music.play(music.createSoundEffect(WaveShape.Sine, 5000, 0, 255, 0, 500, SoundExpressionEffect.None, InterpolationCurve.Linear), music.PlaybackMode.UntilDone)
-    game.splash("Chinese characters are one of the only ancient scripts still in use in the world and have a history of thousands of years.")
+    game.splash("The Spring Festival is the most important traditional festival in China")
     effects.starField.startScreenEffect()
 })
 scene.onOverlapTile(SpriteKind.Player, sprites.dungeon.collectibleInsignia, function (sprite, location) {
     game.over(true, effects.confetti)
 })
-music.play(music.stringPlayable("E B C5 A B G A F ", 196), music.PlaybackMode.UntilDone)
-info.setScore(0)
+music.play(music.melodyPlayable(music.powerUp), music.PlaybackMode.UntilDone)
 let mySprite = sprites.create(img`
     . . . . . . 5 . 5 . . . . . . . 
     . . . . . f 5 5 5 f f . . . . . 
@@ -85,22 +105,70 @@ let NPC3 = sprites.create(img`
     . f f . . f f . . f f . . . 
     `, SpriteKind.NPC2)
 tiles.placeOnRandomTile(NPC3, sprites.dungeon.greenOuterSouth2)
-let NPC4 = sprites.create(img`
+let NPC5 = sprites.create(img`
+    ...bbbbbbbbbb...
+    ..b1111111111b..
+    .b111111111111b.
+    .b111111111111b.
+    .bddccccccccddb.
+    .bdc66666666cdb.
+    .bdc61d66666cdb.
+    .bdc6d666666cdb.
+    .bdc66666666cdb.
+    .bdc66666666cdb.
+    .bdc66666666cdb.
+    .bddccccccccddb.
+    .cbbbbbbbbbbbbc.
+    fccccccccccccccf
+    fbbbbbbbbbbbbbbf
+    fbcdddddddddddbf
+    fbcbbbbbbbbbbcbf
+    fbcbbbbbbbbbbcbf
+    fbccccccccccccbf
+    fbbbbbbbbbbbbbbf
+    fbffffffffffffbf
+    ffffffffffffffff
+    `, SpriteKind.NPC3)
+tiles.placeOnRandomTile(NPC5, sprites.dungeon.greenOuterEast2)
+let NPC6 = sprites.create(img`
+    ....................
+    ....................
+    ....................
+    ....................
+    ....................
+    ...........444......
+    ..........4eee4.....
+    ..........44444.....
+    ...........444......
+    .....444....7.......
+    ....4eee4...7.......
+    ....44444..77.7.....
+    .....444...7766.....
+    ......7....766......
+    .......7...76.......
+    .....7777..7........
+    ......6667.6........
+    .........666........
+    ....................
+    ....................
+    `, SpriteKind.NPC4)
+tiles.placeOnRandomTile(NPC6, sprites.dungeon.purpleSwitchUp)
+let NPC7 = sprites.create(img`
     . . . . . . . . . . . . . . . . 
-    . . . . . . . . . . . . . . . . 
-    . . . . . . . . . . . . . . . . 
-    . . . . . . . . . . . . . . . . 
-    . . . . . . . . . . . . . . . . 
-    . . . . . . . . . . . . . . . . 
-    . . . . . . . . . . . . . . . . 
-    . . . . . . . . . . . . . . . . 
-    . . . . . . . . . . . . . . . . 
-    . . . . . . . . . . . . . . . . 
-    . . . . . . . . . . . . . . . . 
-    . . . . . . . . . . . . . . . . 
-    . . . . . . . . . . . . . . . . 
-    . . . . . . . . . . . . . . . . 
-    . . . . . . . . . . . . . . . . 
-    . . . . . . . . . . . . . . . . 
-    `, SpriteKind.NPC1)
-tiles.placeOnRandomTile(NPC4, sprites.dungeon.greenOuterSouth2)
+    . . . . . . . . . . c c . . . . 
+    . . . . . . c c c c 6 3 c . . . 
+    . . . . . c 6 6 3 3 3 6 c . . . 
+    . . . . c 6 6 3 3 3 3 3 3 c . . 
+    b c c c 6 6 c c 3 3 3 3 3 3 c . 
+    b 5 5 c 6 c 5 5 c 3 3 3 3 3 c . 
+    f f 5 c 6 c 5 f f 6 3 3 3 c c . 
+    f f 5 c c c 5 f f 6 6 6 6 c c . 
+    . b 5 5 3 5 5 c 3 3 3 3 3 3 c . 
+    . c 5 5 5 5 4 c c c 3 3 3 3 c . 
+    . c 4 5 5 4 4 b 5 5 c 3 3 c . . 
+    . c 5 b 4 4 b b 5 c b b c . . . 
+    . c c 5 4 c 5 5 5 c c 5 c . . . 
+    . . . c c 5 5 5 5 c c c c . . . 
+    . . . . c c c c c c . . . . . . 
+    `, SpriteKind.NPC5)
+tiles.placeOnRandomTile(NPC7, sprites.dungeon.stairLadder)
