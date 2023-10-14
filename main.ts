@@ -1,12 +1,23 @@
 namespace SpriteKind {
     export const NPC1 = SpriteKind.create()
+    export const NPC2 = SpriteKind.create()
 }
+sprites.onOverlap(SpriteKind.Player, SpriteKind.NPC2, function (sprite, otherSprite) {
+    music.play(music.createSoundEffect(WaveShape.Triangle, 4906, 1046, 255, 0, 150, SoundExpressionEffect.None, InterpolationCurve.Linear), music.PlaybackMode.UntilDone)
+    game.splash("")
+    effects.starField.endScreenEffect()
+    effects.bubbles.startScreenEffect()
+})
 sprites.onOverlap(SpriteKind.Player, SpriteKind.NPC1, function (sprite, otherSprite) {
-    game.showLongText("Chinese characters are one of the only ancient scripts still in use in the world and have a history of thousands of years.", DialogLayout.Top)
+    music.play(music.createSoundEffect(WaveShape.Sine, 5000, 0, 255, 0, 500, SoundExpressionEffect.None, InterpolationCurve.Linear), music.PlaybackMode.UntilDone)
+    game.splash("Chinese characters are one of the only ancient scripts still in use in the world and have a history of thousands of years.")
+    effects.starField.startScreenEffect()
 })
 scene.onOverlapTile(SpriteKind.Player, sprites.dungeon.collectibleInsignia, function (sprite, location) {
     game.over(true, effects.confetti)
 })
+music.play(music.stringPlayable("E B C5 A B G A F ", 196), music.PlaybackMode.UntilDone)
+info.setScore(0)
 let mySprite = sprites.create(img`
     . . . . . . 5 . 5 . . . . . . . 
     . . . . . f 5 5 5 f f . . . . . 
@@ -29,7 +40,7 @@ controller.moveSprite(mySprite, 100, 100)
 tiles.setTilemap(tilemap`级别1`)
 tiles.placeOnRandomTile(mySprite, sprites.dungeon.collectibleRedCrystal)
 scene.cameraFollowSprite(mySprite)
-info.startCountdown(500)
+info.startCountdown(300)
 let NPC2 = sprites.create(img`
     ........................
     ........................
@@ -72,7 +83,7 @@ let NPC3 = sprites.create(img`
     . f d d d d d b d d f f f . 
     . f d f f f d f f d f . . . 
     . f f . . f f . . f f . . . 
-    `, SpriteKind.NPC1)
+    `, SpriteKind.NPC2)
 tiles.placeOnRandomTile(NPC3, sprites.dungeon.greenOuterSouth2)
 let NPC4 = sprites.create(img`
     . . . . . . . . . . . . . . . . 
