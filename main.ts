@@ -37,6 +37,7 @@ sprites.onOverlap(SpriteKind.Player, SpriteKind.NPC1, function (sprite, otherSpr
 scene.onOverlapTile(SpriteKind.Player, sprites.dungeon.collectibleInsignia, function (sprite, location) {
     game.over(true, effects.confetti)
 })
+game.showLongText("Mini-MazeGame produced by Miaomiao", DialogLayout.Center)
 music.play(music.melodyPlayable(music.powerUp), music.PlaybackMode.UntilDone)
 let mySprite = sprites.create(img`
     . . . . . . 5 . 5 . . . . . . . 
