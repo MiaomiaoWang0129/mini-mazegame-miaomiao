@@ -4,6 +4,7 @@ namespace SpriteKind {
     export const NPC3 = SpriteKind.create()
     export const NPC4 = SpriteKind.create()
     export const NPC5 = SpriteKind.create()
+    export const NPC6 = SpriteKind.create()
 }
 sprites.onOverlap(SpriteKind.Player, SpriteKind.NPC5, function (sprite, otherSprite) {
     music.play(music.createSoundEffect(WaveShape.Sine, 5000, 1, 255, 0, 153, SoundExpressionEffect.None, InterpolationCurve.Curve), music.PlaybackMode.UntilDone)
@@ -34,12 +35,17 @@ sprites.onOverlap(SpriteKind.Player, SpriteKind.NPC1, function (sprite, otherSpr
     game.splash("The Spring Festival is the most important traditional festival in China")
     effects.starField.startScreenEffect()
 })
+sprites.onOverlap(SpriteKind.Player, SpriteKind.NPC6, function (sprite, otherSprite) {
+    mySprite.setFlag(SpriteFlag.BounceOnWall, true)
+    game.gameOver(false)
+})
 scene.onOverlapTile(SpriteKind.Player, sprites.dungeon.collectibleInsignia, function (sprite, location) {
     game.over(true, effects.confetti)
 })
+let mySprite: Sprite = null
 game.showLongText("Mini-MazeGame produced by Miaomiao", DialogLayout.Center)
 music.play(music.melodyPlayable(music.powerUp), music.PlaybackMode.UntilDone)
-let mySprite = sprites.create(img`
+mySprite = sprites.create(img`
     . . . . . . 5 . 5 . . . . . . . 
     . . . . . f 5 5 5 f f . . . . . 
     . . . . f 1 5 2 5 1 6 f . . . . 
@@ -173,3 +179,28 @@ let NPC7 = sprites.create(img`
     . . . . c c c c c c . . . . . . 
     `, SpriteKind.NPC5)
 tiles.placeOnRandomTile(NPC7, sprites.dungeon.stairLadder)
+let NPC8 = sprites.create(img`
+    . . . . . . . . b b b b . . . . 
+    . . . . b b b b 3 3 3 3 b . . . 
+    . c c b b 1 1 3 3 3 3 3 b b . . 
+    c c 3 3 1 1 3 3 3 3 3 1 1 b . . 
+    c b 3 3 3 3 3 3 3 3 3 1 1 b . . 
+    f b b c c c 3 3 3 3 3 3 3 c . . 
+    f b c c c b b b b 3 3 3 3 3 c . 
+    f b c c d d d d d b b 3 3 3 3 c 
+    . c c d c d d d d d d b c 3 3 c 
+    . c b d c d d d c d d c c c 3 f 
+    . f d d d d d c d d d c c c b f 
+    . f d b b b d d d d d c c c b f 
+    . . c d d d d d d d b c b b f f 
+    . . f f d d d d c c b f f f f . 
+    . f f b b f f c c b d d b f . . 
+    . f b b b f f . . b d d d f . . 
+    `, SpriteKind.NPC6)
+animation.runMovementAnimation(
+NPC8,
+animation.animationPresets(animation.easeUp),
+2000,
+true
+)
+tiles.placeOnRandomTile(NPC8, sprites.castle.tileGrass2)
