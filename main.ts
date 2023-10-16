@@ -5,7 +5,12 @@ namespace SpriteKind {
     export const NPC4 = SpriteKind.create()
     export const NPC5 = SpriteKind.create()
     export const NPC6 = SpriteKind.create()
+    export const NPC7 = SpriteKind.create()
+    export const NPC8 = SpriteKind.create()
 }
+sprites.onOverlap(SpriteKind.Player, SpriteKind.NPC7, function (sprite, otherSprite) {
+    info.changeLifeBy(-1)
+})
 sprites.onOverlap(SpriteKind.Player, SpriteKind.NPC5, function (sprite, otherSprite) {
     music.play(music.createSoundEffect(WaveShape.Sine, 5000, 1, 255, 0, 153, SoundExpressionEffect.None, InterpolationCurve.Curve), music.PlaybackMode.UntilDone)
     game.splash("The Great Wall of China is one of the most famous ancient city walls in the world")
@@ -36,16 +41,17 @@ sprites.onOverlap(SpriteKind.Player, SpriteKind.NPC1, function (sprite, otherSpr
     effects.starField.startScreenEffect()
 })
 sprites.onOverlap(SpriteKind.Player, SpriteKind.NPC6, function (sprite, otherSprite) {
-    mySprite.setFlag(SpriteFlag.BounceOnWall, true)
-    game.gameOver(false)
+    info.changeLifeBy(-1)
+})
+sprites.onOverlap(SpriteKind.Player, SpriteKind.NPC8, function (sprite, otherSprite) {
+    info.changeLifeBy(-1)
 })
 scene.onOverlapTile(SpriteKind.Player, sprites.dungeon.collectibleInsignia, function (sprite, location) {
     game.over(true, effects.confetti)
 })
-let mySprite: Sprite = null
 game.showLongText("Mini-MazeGame produced by Miaomiao", DialogLayout.Center)
 music.play(music.melodyPlayable(music.powerUp), music.PlaybackMode.UntilDone)
-mySprite = sprites.create(img`
+let mySprite = sprites.create(img`
     . . . . . . 5 . 5 . . . . . . . 
     . . . . . f 5 5 5 f f . . . . . 
     . . . . f 1 5 2 5 1 6 f . . . . 
@@ -63,10 +69,12 @@ mySprite = sprites.create(img`
     . . . f f f f f f f f f f . . . 
     . . . . . f f . . f f . . . . . 
     `, SpriteKind.Player)
+info.setLife(5)
 controller.moveSprite(mySprite, 100, 100)
 tiles.setTilemap(tilemap`级别1`)
 tiles.placeOnRandomTile(mySprite, sprites.dungeon.collectibleRedCrystal)
 scene.cameraFollowSprite(mySprite)
+mySprite.setFlag(SpriteFlag.ShowPhysics, true)
 info.startCountdown(300)
 let NPC2 = sprites.create(img`
     ........................
@@ -199,8 +207,58 @@ let NPC8 = sprites.create(img`
     `, SpriteKind.NPC6)
 animation.runMovementAnimation(
 NPC8,
+animation.animationPresets(animation.shake),
+2000,
+true
+)
+tiles.placeOnRandomTile(NPC8, sprites.builtin.oceanSand3)
+let NPC9 = sprites.create(img`
+    . . . . . . . . . . . . . . . . 
+    . . . . . . . c c c c c . . . . 
+    . . . . . . c d d d d d c . . . 
+    . . . . . . c c c c c d c . . . 
+    . . . . . c 4 4 4 4 d c c . . . 
+    . . . . c d 4 4 4 4 4 1 c . . . 
+    . . . c 4 4 1 4 4 4 4 4 1 c . . 
+    . . c 4 4 4 4 1 4 4 4 4 1 c c c 
+    . c 4 4 4 4 4 1 c c 4 4 1 4 4 c 
+    . c 4 4 4 4 4 1 4 4 f 4 1 f 4 f 
+    f 4 4 4 4 f 4 1 c 4 f 4 d f 4 f 
+    f 4 4 4 4 4 4 1 4 f f 4 f f 4 f 
+    . f 4 4 4 4 1 4 4 4 4 c b c f f 
+    . . f f f d 4 4 4 4 c d d c . . 
+    . . . . . f f f f f c c c . . . 
+    . . . . . . . . . . . . . . . . 
+    `, SpriteKind.NPC7)
+animation.runMovementAnimation(
+NPC9,
 animation.animationPresets(animation.easeUp),
 2000,
 true
 )
-tiles.placeOnRandomTile(NPC8, sprites.castle.tileGrass2)
+tiles.placeOnRandomTile(NPC9, sprites.builtin.oceanSand5)
+let NPC10 = sprites.create(img`
+    . . . . . . . . . . . . . . . . 
+    . . . . . . . . c c c c c . . . 
+    . . . . . . c c 5 5 5 5 5 c . . 
+    . . . . . c 5 5 5 5 5 5 5 5 c . 
+    . . . . c b b b b b b 5 5 5 c . 
+    . . . . c 1 1 b b 1 b b c c . . 
+    . . . c 1 1 1 b b 1 1 1 c . . . 
+    . . . c 1 1 1 1 b 1 1 1 c . c c 
+    . . . c d 1 1 1 b 1 1 1 b b 5 c 
+    . . c c d 1 c 1 b 1 b 1 5 5 5 c 
+    . c c d d 1 1 1 1 1 b 1 b b 5 c 
+    f d d d 1 1 1 1 1 b b 1 f . c c 
+    f f f 1 1 1 1 1 1 b b b f . . . 
+    . . . f f 1 1 1 b b b 5 5 f . . 
+    . . . . . f f f 5 5 5 5 5 f . . 
+    . . . . . . . . f f f f f f . . 
+    `, SpriteKind.NPC8)
+animation.runMovementAnimation(
+NPC10,
+animation.animationPresets(animation.bounceLeft),
+2000,
+true
+)
+tiles.placeOnRandomTile(NPC8, sprites.castle.saplingPine)
