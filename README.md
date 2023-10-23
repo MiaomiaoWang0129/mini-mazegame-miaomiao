@@ -1,6 +1,6 @@
- 
 
 
+https://arcade.makecode.com/S39841-26094-26820-06898
 > 在 [https://miaomiaowang0129.github.io/mini-mazegame-miaomiao/](https://miaomiaowang0129.github.io/mini-mazegame-miaomiao/) 打开此页面
 
 ## 用作扩展
