@@ -17,8 +17,8 @@ This repository can be added to MakeCode as a **plugin**.
 Edit this repository in MakeCode.
 
 * Open [https://arcade.makecode.com/](https://arcade.makecode.com/)
-* 点击 **导入**，然后点击 **导入 URL**
-* 粘贴 **https://github.com/miaomiaowang0129/mini-mazegame-miaomiao** 并点击导入
+* Click **Import**, then **Import URL**
+* Paste **https://github.com/miaomiaowang0129/mini-mazegame-miaomiao** and click Import
 
 ## Blocks preview
 
